@@ -75,7 +75,13 @@ class MyHomePage extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(tx.title as String),
+                        Text(
+                          tx.title as String,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Text(
                           tx.date.toString(),
                           style: const TextStyle(
