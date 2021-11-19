@@ -5,14 +5,14 @@ import '../models/transaction.dart';
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
 
-  TransactionList(this.transactions);
+  const TransactionList(this.transactions);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 300,
-      child: ListView(
-        children: transactions.map((tx) {
+      child: ListView.builder(
+        itemBuilder: (context, index) {
           return Card(
             child: Row(
               children: <Widget>[
@@ -29,7 +29,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    '\$ ${tx.amount}',
+                    '\$ ${transactions[index].amount}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -41,14 +41,16 @@ class TransactionList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      tx.title as String,
+                      transactions[index].title as String,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      DateFormat.yMMMd().add_Hm().format(tx.date as DateTime),
+                      DateFormat.yMMMd()
+                          .add_Hm()
+                          .format(transactions[index].date as DateTime),
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -59,7 +61,8 @@ class TransactionList extends StatelessWidget {
               ],
             ),
           );
-        }).toList(),
+        },
+        itemCount: transactions.length,
       ),
     );
   }
